@@ -1,7 +1,13 @@
+import { cookies } from 'next/headers';
 import { LoginForm } from './form';
 import Link from 'next/link';
+import { decrypt } from '@/lib/sessions';
 
-export default function Page() {
+export default async function Page() {
+
+const cookie = cookies().get('session')?.value;
+    const session = await decrypt(cookie)
+    console.log(session);
   return (
     <div className="flex flex-col p-4 lg:w-1/3">
       <div className="text-center">
